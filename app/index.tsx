@@ -1,9 +1,19 @@
-import { useRouter } from "expo-router";
+import { useEffect, useState } from 'react'
+import { useRouter } from 'expo-router'
 
-export default function index() {
+export default function Index() {
+	const router = useRouter()
+	const [hasMounted, setHasMounted] = useState(false)
 
-    const router = useRouter();
+	useEffect(() => {
+		setHasMounted(true)
+	}, [])
 
-    router.push('/login');
+	useEffect(() => {
+		if (hasMounted) {
+			router.push('/home')
+		}
+	}, [hasMounted, router])
 
+	return null
 }
