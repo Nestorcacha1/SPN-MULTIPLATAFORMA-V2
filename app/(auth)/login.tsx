@@ -55,7 +55,7 @@ const LoginPage = () => {
           onPress={handlePress}
         >
           {loading ? (
-            <ActivityIndicator size={'large'} color="#fff" />
+            <ActivityIndicator size={48} color="#fff" />
           ) : (
             <Text style={[styles.buttonText, { fontSize: fontSizes.buttonText }]}>INICIAR SESIÓN</Text>
           )}
