@@ -16,6 +16,7 @@ const LoginPage = () => {
     setLoading(true);
   };
 
+  
   useEffect(() => {
     if (loading) {
       const timer = setTimeout(() => {
