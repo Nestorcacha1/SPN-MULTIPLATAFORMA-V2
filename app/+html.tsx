@@ -29,10 +29,19 @@ export default function Root({ children }: PropsWithChildren) {
 }
 
 const responsiveBackground = `
+html {
+  heigth: 100%;
+}
+
+input:focus {
+  outline: none;
+}
+  
 body {
   background-color: #fff;
 }
-@media (prefers-color-scheme: dark) {
+
+@media (prefers-color-scheme: ligth) {
   body {
     background-color: #000;
   }

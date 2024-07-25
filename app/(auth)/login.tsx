@@ -1,29 +1,68 @@
+import Background from '@/components/login/Background';
 import * as React from 'react';
-import { Avatar, Button, Card, Text } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
-const LeftContent = (props: any) => <Avatar.Icon {...props} icon="folder" />
+import { Text } from 'react-native-paper';
+import TextInput from '@/components/login/TextInput';
+import { Pressable } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { StatusBar } from 'expo-status-bar'
+import useAdaptiveFont from '@/hooks/useAdaptativeFont';
 
 const LoginPage = () => {
-    return (
-        <>
-            <SafeAreaView >
-                <Card>
-                    <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
-                    <Card.Content>
-                        <Text variant="titleLarge">Card title</Text>
-                        <Text variant="bodyMedium">Card content</Text>
-                    </Card.Content>
-                    <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-                    <Card.Actions>
-                        <Button>Cancel</Button>
-                        <Button>Ok</Button>
-                    </Card.Actions>
-                </Card>
-            </SafeAreaView>
 
-        </>
-    );
+  const fontSizes = useAdaptiveFont();
+
+  return (
+    <>
+      <StatusBar style='light' />
+      <Background>
+
+        <TextInput
+          placeholder="Ingrese Usuario"
+          returnKeyType="next"
+          autoCapitalize="none"
+          textContentType="emailAddress"
+          keyboardType="email-address"
+        />
+
+        <TextInput
+          placeholder="Ingrese Contraseña"
+          returnKeyType="done"
+          secureTextEntry
+        />
+
+        <Pressable
+          style={
+
+            ({ pressed }) => [
+            styles.button,
+            { backgroundColor: pressed ? '#D85D0A' : '#EA580C' }
+            
+          ]
+        }
+        >
+          <Text style={[styles.buttonText, { fontSize: fontSizes.buttonText }]}>INICIAR SESIÓN</Text>
+        </Pressable>
+      </Background>
+    </>
+  );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    marginVertical: 12
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    padding: 12,
+  },
+});
 
 export default LoginPage;

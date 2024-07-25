@@ -1,6 +1,6 @@
 import { Slot } from 'expo-router';
-import 'react-native-reanimated';
 import { PaperProvider } from 'react-native-paper';
+import 'react-native-reanimated';
 
 export default function RootLayout() {
 

@@ -1,9 +1,24 @@
-import { useRouter } from "expo-router";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'expo-router';
+import { View, Text } from 'react-native';
 
-export default function index() {
+export default function Index() {
+  const router = useRouter();
+  const [isReady, setIsReady] = useState(false);
 
-    const router = useRouter();
+  useEffect(() => {
+    setIsReady(true);
+  }, []);
 
-    router.push('/login');
+  useEffect(() => {
+    if (isReady) {
+      router.replace('/login');
+    }
+  }, [isReady, router]);
 
+  return (
+    <View>
+      <Text>Redirigiendo...</Text>
+    </View>
+  );
 }
