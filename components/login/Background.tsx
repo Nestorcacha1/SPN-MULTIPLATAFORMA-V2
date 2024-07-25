@@ -40,7 +40,7 @@ const Background = ({ children }: { children: React.ReactNode }) => {
         style={[isWeb && { height: height }, styles.background, { display: display === 'none' ? 'flex' : 'none' }]}
       >
         <View style={[isWeb && { height: height }, styles.overlay]} />
-        <KeyboardAvoidingView style={[styles.container, { width: containerWidth as any }]} behavior="padding">
+        <KeyboardAvoidingView style={[styles.container, { width: containerWidth as any }]}>
           <Logo image={logo}/>
           <Header>Sistema de Padrón Nominal de Gestantes</Header>
           {children}
@@ -59,7 +59,7 @@ const Background = ({ children }: { children: React.ReactNode }) => {
           </ImageBackground>
         </View>
 
-        <KeyboardAvoidingView style={[styles.container, styles.containerAdaptative]} behavior="padding">
+        <KeyboardAvoidingView style={[styles.container, styles.containerAdaptative]}>
           <Logo image={logo}/>
           {children}
         </KeyboardAvoidingView>
