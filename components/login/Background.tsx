@@ -6,14 +6,17 @@ import {
   View,
   Text,
   ImageSourcePropType,
+  Platform,
 } from 'react-native';
 import Logo from './Logo';
 import Header from './Header';
 import useResponsiveLayout from '@/hooks/useResponsiveLayout';
 import { useEffect } from 'react';
 
+const isWeb = Platform.OS === 'web';
+
 const Background = ({ children }: { children: React.ReactNode }) => {
-  const { containerWidth, height, display, isWeb } = useResponsiveLayout();
+  const { containerWidth, height, display } = useResponsiveLayout();
   const [backgroundImage, setBackgroundImage] = useState<ImageSourcePropType | null>()
   const [logo, setLogo] = useState<ImageSourcePropType | null>()
 
@@ -37,7 +40,7 @@ const Background = ({ children }: { children: React.ReactNode }) => {
       <ImageBackground
         source={backgroundImage}
         resizeMode="cover"
-        style={[isWeb && { height: height }, styles.background, { display: display === 'none' ? 'flex' : 'none' }]}
+        style={[isWeb? { height: height } : { flex: 1 }, styles.background, { display: display === 'none' ? 'flex' : 'none' }]}
       >
         <View style={[isWeb && { height: height }, styles.overlay]} />
 
