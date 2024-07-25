@@ -1,15 +1,32 @@
 import Background from '@/components/login/Background';
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Text } from 'react-native-paper';
 import TextInput from '@/components/login/TextInput';
-import { Pressable } from 'react-native';
-import { StyleSheet } from 'react-native';
+import { Pressable, ActivityIndicator, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar'
 import useAdaptiveFont from '@/hooks/useAdaptativeFont';
+import { useRouter } from 'expo-router';
 
 const LoginPage = () => {
-
   const fontSizes = useAdaptiveFont();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handlePress = () => {
+    setLoading(true);
+  };
+
+  useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => {
+        setLoading(false);
+        // Redirigir a la siguiente página
+        router.replace('/home'); // Cambia '/nextPage' a la ruta a la que quieres redirigir
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [loading, router]);
 
   return (
     <>
@@ -31,16 +48,17 @@ const LoginPage = () => {
         />
 
         <Pressable
-          style={
-
-            ({ pressed }) => [
+          style={({ pressed }) => [
             styles.button,
             { backgroundColor: pressed ? '#D85D0A' : '#EA580C' }
-            
-          ]
-        }
+          ]}
+          onPress={handlePress}
         >
-          <Text style={[styles.buttonText, { fontSize: fontSizes.buttonText }]}>INICIAR SESIÓN</Text>
+          {loading ? (
+            <ActivityIndicator size={'large'} color="#fff" />
+          ) : (
+            <Text style={[styles.buttonText, { fontSize: fontSizes.buttonText }]}>INICIAR SESIÓN</Text>
+          )}
         </Pressable>
       </Background>
     </>
